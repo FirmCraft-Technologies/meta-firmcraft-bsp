@@ -1,7 +1,7 @@
 DESCRIPTION = "FirmCraft custom Yocto image with GUI"
 LICENSE = "MIT"
 inherit core-image
-IMAGE_INSTALL += "lxde-base lightdm networkmanager firmcraft-wallpaper ssh-autologin"
+IMAGE_INSTALL += "networkmanager firmcraft-wallpaper ssh-autologin"
 IMAGE_FEATURES += "ssh-server-openssh"
 SPLASH = "psplash-firmcraft"
 
