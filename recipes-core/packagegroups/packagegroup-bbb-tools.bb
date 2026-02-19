@@ -1,6 +1,7 @@
 SUMMARY = "BeagleBone Black Development and Debug Tools Package Group"
 DESCRIPTION = "Collection of tools for BBB development, debugging, and hardware access"
 LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 inherit packagegroup
 

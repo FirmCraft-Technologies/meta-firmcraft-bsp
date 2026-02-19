@@ -20,7 +20,11 @@ do_compile() {
     for dts_file in ${WORKDIR}/*.dts; do
         if [ -f "$dts_file" ]; then
             dtc_basename=$(basename "$dts_file" .dts)
-            dtc -@ -I dts -O dtb -o ${B}/${dtc_basename}.dtbo "$dts_file" || true
+            bbplain "Compiling device tree overlay: $dtc_basename"
+            dtc -@ -I dts -O dtb -o ${B}/${dtc_basename}.dtbo "$dts_file"
+            if [ $? -ne 0 ]; then
+                bbfatal "Failed to compile device tree overlay: $dtc_basename"
+            fi
         fi
     done
 }
