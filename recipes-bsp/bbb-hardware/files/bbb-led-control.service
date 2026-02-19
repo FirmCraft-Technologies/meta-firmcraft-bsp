@@ -1,0 +1,11 @@
+[Unit]
+Description=BeagleBone Black LED Initialization
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bbb-led-control.sh init
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

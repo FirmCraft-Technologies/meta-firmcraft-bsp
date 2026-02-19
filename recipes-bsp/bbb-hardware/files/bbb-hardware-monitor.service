@@ -1,0 +1,14 @@
+[Unit]
+Description=BeagleBone Black Hardware Monitor
+After=multi-user.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/bbb-hardware-monitor.sh start
+ExecStop=/usr/bin/bbb-hardware-monitor.sh stop
+RemainAfterExit=yes
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

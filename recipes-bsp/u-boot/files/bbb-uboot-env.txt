@@ -1,0 +1,35 @@
+# BeagleBone Black U-Boot Environment Customization
+# This file provides custom U-Boot environment variables for BBB
+
+# Set boot delay
+setenv bootdelay 3
+
+# Set console parameters
+setenv console ttyS0,115200n8
+
+# FirmCraft branding
+setenv firmcraft_banner "echo '===================================='; echo 'FirmCraft BeagleBone Black BSP'; echo 'Version 2.0 - Advanced Features'; echo '===================================='"
+
+# Custom boot command with FirmCraft banner
+setenv bootcmd 'run firmcraft_banner; run mmcboot'
+
+# Set default device tree
+setenv fdtfile am335x-boneblack.dtb
+
+# Enable device tree overlay support
+setenv enable_uboot_overlays 1
+
+# Device tree overlays to load
+setenv uboot_overlay_addr0 /lib/firmware/BB-GPIO-HELPER-00A0.dtbo
+setenv uboot_overlay_addr1 /lib/firmware/BB-I2C1-00A0.dtbo
+
+# Network configuration
+setenv ipaddr 192.168.1.100
+setenv serverip 192.168.1.1
+setenv netmask 255.255.255.0
+
+# Extra bootargs for advanced features
+setenv optargs 'coherent_pool=1M net.ifnames=0 quiet'
+
+# Save environment
+saveenv
