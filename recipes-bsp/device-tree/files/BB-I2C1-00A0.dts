@@ -1,0 +1,50 @@
+/dts-v1/;
+/plugin/;
+
+/*
+ * BeagleBone Black I2C1 Overlay
+ * Enables I2C1 bus on P9.17 (SCL) and P9.18 (SDA)
+ */
+
+/ {
+    compatible = "ti,beaglebone", "ti,beaglebone-black";
+    
+    /* identification */
+    part-number = "BB-I2C1";
+    version = "00A0";
+    
+    /* state the resources this cape uses */
+    exclusive-use =
+        /* the pin header uses */
+        "P9.17",    /* i2c1_scl */
+        "P9.18",    /* i2c1_sda */
+        /* the hardware IP uses */
+        "i2c1";
+
+    fragment@0 {
+        target = <&am33xx_pinmux>;
+        __overlay__ {
+            bb_i2c1_pins: pinmux_bb_i2c1_pins {
+                pinctrl-single,pins = <
+                    0x15c 0x32  /* P9_17: spi0_cs0.i2c1_scl, MODE2 | INPUT_PULLUP */
+                    0x158 0x32  /* P9_18: spi0_d1.i2c1_sda,  MODE2 | INPUT_PULLUP */
+                >;
+            };
+        };
+    };
+
+    fragment@1 {
+        target = <&i2c1>;
+        __overlay__ {
+            status = "okay";
+            pinctrl-names = "default";
+            pinctrl-0 = <&bb_i2c1_pins>;
+            
+            /* Set I2C clock frequency */
+            clock-frequency = <400000>;
+            
+            #address-cells = <1>;
+            #size-cells = <0>;
+        };
+    };
+};
